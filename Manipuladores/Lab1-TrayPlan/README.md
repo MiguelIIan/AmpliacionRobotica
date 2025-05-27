@@ -1,4 +1,4 @@
-# Resultado de la Simulación
+# Resultado de la Práctica
 
 ![Vídeo-sin-título-‐-Hecho-con-Clipchamp](https://github.com/user-attachments/assets/71d4a337-91c4-4844-bd79-321e9ecef75e)
 
