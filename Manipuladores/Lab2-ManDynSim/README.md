@@ -1,6 +1,6 @@
 # Lab Session 2: Manipulator Dynamics Simulation
 
-En esta práctica, hemos llevado a cabo la simulación de un manipulador de dos grados de libertad cayendo por la fuerza de la gravedad. Esto lo podemos ver en el siguiente vídeo:
+En esta práctica, hemos llevado a cabo la simulación de un manipulador de dos grados de libertad cayendo por la fuerza de la gravedad. Esto lo podemos ver en la siguiente imagen:
 
 
 
