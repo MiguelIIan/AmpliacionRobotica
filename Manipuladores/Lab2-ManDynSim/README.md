@@ -200,11 +200,45 @@ Se pueden visualizar las variables de los mensajes entre los nodos utilizando la
 </p>
 
 
+### Experimentos
+
+<div align="justify">
+Probemos a realizar varios experimentos, cambiando los parametros de la dinámica del manipulador. Estos experimentos los vamos a ver en las Imagenes 6, 7 y 8.
+</div>
 
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/dd8e7e24-5c49-4315-b05e-2789fc8679d8">
+  <br>
+  <i>Imagen 6.- Experimento aumentando las masas de los eslabones.</i>
+</p>
 
+<div align="justify">
+En la Imagen 6 se ha cambiado m1 a 5 kilogramos en vez de 3 y m2 a 3 kilogramos en vez de 2. Se puede comprobar con la Imagen 5 que el manipulador oscila más y más rápido, esto se debe al aumento de masa que aumenta la fuerza gravitatoria que actua sobre el manipulador.
+</div>
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/394b3ad7-9c53-4dfd-b2a9-afeec33875eb">
+  <br>
+  <i>Imagen 7.- Experimento aumentando la amortiguación de las articulaciones.</i>
+</p>
 
+<div align="justify">
+En la Imagen 7 se ha cambiado b1 a 10 en vez de 5 y b2 a 10 kilogramos en vez de 5. Se puede comprobar con la Imagen 5 que el manipulador oscila mucho menos y más lento, esto se debe al aumento de la fuerza de amortiguación, frenando el movimiento producido por la gravedad.
+</div>
+
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/3428620f-c615-4bd0-90ca-8b6649fbd3ce">
+  <br>
+  <i>Imagen 8.- Experimento reduciendo el valor de la gravedad.</i>
+</p>
+
+<div align="justify">
+En la Imagen 8 se ha cambiado la gravedad de la normal de la tierra a 5 m/s. Comparando con la Imagen 5 se puede observar que el manipulador se mueve mucho más lento, esto se debe a la disminución de la fuerza gravitatoria que tira del manipulador hacia abajo.
+</div>
 
 
 
