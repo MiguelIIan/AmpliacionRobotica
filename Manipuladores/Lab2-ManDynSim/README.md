@@ -56,8 +56,8 @@ $$
 \begin{align}
 M(q) = 
 \begin{bmatrix}  
-m_1​⋅l_1^2​+m_2​⋅(l_1^2​+2⋅l_1​⋅l_2​⋅cos(q_2​)+l_2^2​) & m_​2⋅(l_1​⋅l_2​⋅cos(q_2​)+l_2^2​) \\
-m_​2⋅(l_1​⋅l_2​⋅cos(q_2​)+l_2^2​) & m_2·l_2^2
+m_1·l_1^2+m_2⋅(l_1^2+2⋅l_1⋅l_2⋅cos(q_2)+l_2^2) & m_2⋅(l_1⋅l_2⋅cos(q_2)+l_2^2) \\
+m_2⋅(l_1⋅l_2⋅cos(q_2)+l_2^2) & m_2·l_2^2
 \end{bmatrix} \qquad\qquad (3)
 \end{align}
 $$
@@ -66,8 +66,8 @@ $$
 \begin{align}
 C(q,q')q' = 
 \begin{bmatrix}  
-−m_2​⋅l_1​⋅l_2​⋅sin(q_2​)⋅(2⋅q_1'​⋅q_2'​+q_2'^2​) \\
-m_2​⋅l_1​⋅l_2​⋅q_1^2​⋅sin(q_2​)​
+−m_2⋅l_1⋅l_2⋅sin(q_2)⋅(2⋅q_1'⋅q_2'+q_2'^2) \\
+m_2⋅l_1⋅l_2⋅q_1^2⋅sin(q_2)​
 \end{bmatrix} \qquad\qquad (4)
 \end{align}
 $$
@@ -86,8 +86,8 @@ $$
 \begin{align}
 g(q) = 
 \begin{bmatrix}  
-(m_1​+m_2​)⋅l_1​⋅g⋅​cos(q_1​)+m_2​⋅g⋅​l_2​⋅cos(q_1​+q_2​) \\
-m_2​⋅g⋅l_2​⋅cos(q_1​+q_2​)​
+(m_1+m_2)⋅l_1⋅g⋅cos(q_1)+m_2⋅g⋅l_2⋅cos(q_1+q_2) \\
+m_2⋅g⋅l_2⋅cos(q_1+q_2)​
 \end{bmatrix} \qquad\qquad (6)
 \end{align}
 $$
@@ -100,8 +100,8 @@ $$
 \begin{align}
 J(q) = 
 \begin{bmatrix}  
-−l_1​⋅sin(q_1​)−l_2​⋅sin(q_1​+q_2​) & ​−l_2​⋅sin(q_1​+q_2​) \\
-l_1​⋅cos(q_1​)+l_2​⋅cos(q_1​+q_2​) & l_2​⋅cos(q_1​+q_2​)​
+−l_1⋅sin(q_1)−l_2⋅sin(q_1+q_2) & ​−l_2⋅sin(q_1+q_2) \\
+l_1⋅cos(q_1)+l_2⋅cos(q_1+q_2) & l_2⋅cos(q_1+q_2)​
 \end{bmatrix} \qquad\qquad (7)
 \end{align}
 $$
