@@ -155,19 +155,125 @@ $$
 
 ## Experimento 1: Aplicando fuerzas virtuales al manipulador
 
+<div align="justify">
+  En este primer experimento se va a observar el comportamiento del manipulador al actuar sobre él distintas fuerzas externas. Este comportamiento se puede apreciar en el Video 1 así como en las Imagenes 7 y 8.
+</div>
 
-![Captura desde 2025-06-12 13-58-09](https://github.com/user-attachments/assets/5e790ba1-b1b3-40e5-89ab-449793b32f44)
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/adc9ed0d-585f-4be8-a1a1-d3279c2105c0">
+  <br>
+  <i>Video 1.- Respuesta del manipulador a fuerzas externas.</i>
+</p>
 
-![Captura desde 2025-06-12 13-58-01](https://github.com/user-attachments/assets/ca28135c-897d-4809-bc56-69bc363c4159)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5e790ba1-b1b3-40e5-89ab-449793b32f44">
+  <br>
+  <i>Imagen 7.- Comparación entre la fuerza externa y el movimiento del robot en el eje x.</i>
+</p>
 
-*Notar que el video y las gráficas son pruebas distintas.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ca28135c-897d-4809-bc56-69bc363c4159">
+  <br>
+  <i>Imagen 8.- Comparación entre la fuerza externa y el movimiento del robot en el eje y.</i>
+</p>
+<div align="right">
+  
+  ***Nota importante: El video y las gráficas no se corresponden entre si.***
+  <br><br>
+</div>
 
+### Efectos de cambiar los parametros de la impedancia
 
+<div align="justify">
+  
+  Ahora se va a probar a cambiar los parámetros **M**, **B** y **K** de la impedancia. Al cambiar la matriz **B** de su valor normal de [100,0,0,100] a [10,0,0,10] el comportamiento que obtenemos es mucho menos suave, ya que, al reducir el amortiguamiento, el manipulador opone menor resistencia a las fuerzas, lo que lo puede llevar muy facilmente a configuraciones degeneradas. Esto se puede observar en el Video 2 y la Imagen 9. Al cambiar la matriz **M** a un valor muy grande, cambiando de [1,0,0,1] inicialmente a [100,0,0,100], obtenemos un comportamiento sobreoscilante, muy inercial, debido a que el controlador cree q las masas son mucho mayores de lo que son en realidad. Esto se ve en el Video 3 y la Imagen 10. Por otro lado, modificar la matriz **K** no genera grandes diferencias que se puedan apreciar en la visualización.
+</div>
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/d22a6201-3a63-4880-aca9-c80a1442ef1d">
+  <br>
+  <i>Video 2.- Respuesta del manipulador a fuerzas externas con la nueva matriz de amortiguamiento.</i>
+</p>
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/1be93869-7473-425c-bc58-1ddc90c62586">
+  <br>
+  <i>Imagen 9.- Respuesta del manipulador a fuerzas externas con la nueva matriz de amortiguamiento.</i>
+</p>
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/964965c5-d16a-4664-b9eb-6c28745559f9">
+  <br>
+  <i>Video 3.- Respuesta del manipulador a fuerzas externas con la nueva matriz de masas.</i>
+</p>
 
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/d620dc73-de1b-4409-9dfb-46c70d018824">
+  <br>
+  <i>Imagen 10.- Respuesta del manipulador a fuerzas externas con la nueva matriz de masas.</i>
+</p>
+<div align="right">
+  
+  ***Nota importante: El video y las gráficas no se corresponden entre si.***
+  <br><br>
+</div>
 
+<div align="justify">
+  Se puede ver en la Imagen 10 que, al moverse con la inercia de esa supuesta gran masa, el manipulador oscila hasta el punto de acabar llegando a una singularidad. 
+</div>
+
+### Efectos de tener alta impedancia en X y baja impedancia en Y
+
+<div align="justify">
+  
+  A continuación, en el Video 4, se comprobará el comportamiento del manipulador al tener distintas impedancias. Se puede observar como en el eje x, el manipulador se resiste más al movimiento, mientras que en el eje y se mueve demasiado rápido y oscila, lo que le acaba llevando a una singularidad.
+</div>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cb28c122-592c-49df-81d1-efa8e56b9e57">
+  <br>
+  <i>Video 4.- Respuesta del manipulador a fuerzas externas con ejes con distintas impedancias.</i>
+</p>
+
+### Preguntas
+
+<div align="justify">
+  
+  **¿Las fuerzas ejercidas en el eje X generan movimiento en el eje Y?**
+
+  Así es, la fuerza ejercida tanto en el eje X como en el eje Y generan movimiento en el eje perpendicular. Esto se debe a la forma del manipulador y que no estamos controlando la posición cartesiana, es decir, cuando aplicamos una fuerza, al estar el manipulador formado por articulaciones de revolución, el movimiento es circular al estar pivotando sobre la articulación. Esto va a ser lo que genere un movimiento en el eje perpendicular al de la fuerza.
+
+  **¿Cómo podría resolverse este problema?**
+
+  Este comportamiento se podría minimizar controlando la posición cartesiana del efector final en función de las fuerzas externas en vez de la articular. En esta práctica, hemos hecho un control de impedancias cogiendo como información de partida la posición articular del manipulador, y en función de la impedancia generada, volver a la posición de equilibrio más o menos rápido. Si quisiesemos resolver los movimientos en los ejes perpendiculares a las aplicaciones de las fuerzas, tendremos que controlar la impedancia con la posición cartesiana de partida.
+</div>
+
+## Experimento 2: Cambiar la posición de equilibrio
+
+<div align="justify">
+  En este experimento se va a ir cambiando la posición de equilibrio del manipulador para ver como responde. En el Video 5 se va a ver como el punto de equilibrio va cambiando y el manipulador lo va siguiendo, pero llega un punto en el que para ir al nuevo punto de equilibrio, el manipulador debe pasa por un sitio donde no llega, es decir, una singularidad de la posición, lo que genera ese comportamiento erratico de la simulación.
+</div>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/55d6f945-839e-4c46-a3e5-26433c0164ac">
+  <br>
+  <i>Video 5.- Respuesta del manipulador a cambios de la posición de equilibrio.</i>
+</p>
+
+<div align="justify">
+  Aunque no sea el mismo experimento, en la Imagen 11 se puede ver como el manipulador sigue las posiciones de equilibrio indicadas hasta que, para llegar a una de ellas, el manipulador debería pasar por una trayectoria a la que no llega, esto es una sigularidad en la posición y provoca que la simulación colapse. 
+</div>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/370fb208-a826-4db2-b8e5-42a451d738bf">
+  <br>
+  <i>Imagen 11.- Respuesta del manipulador a cambios de la posición de equilibrio.</i>
+</p>
 
 
 
