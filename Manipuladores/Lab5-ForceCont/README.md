@@ -99,12 +99,12 @@ $$
 Introduciendo todos estos valores en el esquema de Simulink, en la Imagen 3, vemos un comportamiento, en la Imagen 4, extraño, ya que la fuerza a la salida se estabiliza en una fuerza muy distinta a la de referencia. Esto se debe a que el controlador $C_F$ es proporcional y no corrige el error en régimen permanente.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/69eab521-f783-453f-bd18-27e75e872882">
+  <img src="https://github.com/user-attachments/assets/b422cc18-7277-4cf0-afca-ca321d05f319">
   <i>Imagen 3.- Esquema del control de fuerzas implementado en Simulink.</i>
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8fbda213-7b22-4623-b348-bc71308b686f">
+  <img src="https://github.com/user-attachments/assets/09427eab-52dd-4758-b5dd-69da97e5b909">
   <i>Imagen 4.- Fuerza del manipulador a la salida del control de fuerza.</i>
 </p>
 
@@ -113,7 +113,7 @@ En la Imagen 4 se puede observar como, a causa del controlador proporcional, la 
 Si se mira con detenimiento la salida del controlador de la posición, en la Imagen 5, se observa que, el manipulador, no se mantiene en su posición Y, sino que cae hasta el "suelo". 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/0dc6644c-942f-44f0-8ac0-091689899c6f">
+  <img src="https://github.com/user-attachments/assets/be05672b-d60a-4282-a2ec-a0103a7f0e4b">
   <i>Imagen 5.- Comportamiento en X e Y del manipulador.</i>
 </p>
 
@@ -147,21 +147,21 @@ $$
 El nuevo esquema en Simulink se puede apreciar en la Imagen 6.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ec75d288-7c5a-4672-95a6-0f924293b63b">
+  <img src="https://github.com/user-attachments/assets/93101a2f-7454-46e3-83b1-4680c36184be">
   <i>Imagen 6.- Esquema de Simulink usando un control de fuerzas PI.</i>
 </p>
 
 La pregunta viene ahora, ¿ha resuelto este cambio nuestros problemas?. Observese la Imagen 7 con la fuerza a la salida del sistema.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/828b454d-bb4f-49ef-9e51-23ad29329f7c">
+  <img src="https://github.com/user-attachments/assets/bfc8b1e6-0a00-4dc7-816c-34af70115cae">
   <i>Imagen 7.- Salida de fuerza del sistema.</i>
 </p>
 
 En la Imagen 7 se puede ver como el control, esta vez, si llega en régimen permanente a $10 N$, la fuerza de referencia del sistema. Veamos la posición en X e Y en la Imagen 8 para ver si también se ha solucionado ese problema.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/42528ae5-4fdf-458f-80a1-eac73acd7f5c">
+  <img src="https://github.com/user-attachments/assets/a6d5f68d-666f-425f-a4d1-3cb7f315cd37">
   <i>Imagen 8.- Posición X e Y del manipulador.</i>
 </p>
 
