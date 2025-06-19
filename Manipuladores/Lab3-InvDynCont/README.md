@@ -33,7 +33,7 @@ Despues de crear el nodo "gravity_compensation.cpp" y copiar el código dado, se
 ### Ejecución del controlador
 
 <div align="justify">
-Teniendo el código completo, falta, antes de poder simular, crear el archivo launch con el que se lanzarán los nodos y modificar el archivo CMakeList. Habiendo hecho esto, ya se pueden lanzar los siguientes comandos y ver que ocurre en la Imagen 2.
+Teniendo el código completo, falta, antes de poder simular, crear el archivo launch con el que se lanzarán los nodos y modificar el archivo CMakeList para incluir el nodo como ejecutable en la compilación del paquete. Habiendo hecho esto, ya se pueden lanzar los siguientes comandos y ver que ocurre en la Imagen 2.
 <br><br>
 </div>
 
@@ -44,7 +44,7 @@ Teniendo el código completo, falta, antes de poder simular, crear el archivo la
     ros2 launch uma_arm_control uma_arm_dynamics_launch.py
 
 <div align="justify">
-Cada uno de estos comandos se debe ejecutar en una terminal a parte. Podemos ver entonces el resultado en RViz en la Imagen 2.
+Cada uno de estos comandos se debe ejecutar en una terminal a parte. Se puede ver entonces el resultado en RViz en la Imagen 2.
 </div>
 
 <p align="center">
@@ -56,13 +56,13 @@ Cada uno de estos comandos se debe ejecutar en una terminal a parte. Podemos ver
 
 
 <div align="justify">
-En la Imagen 2 podemos observar como el manipulador se queda totalmente estático en la posición inicial dada. Esto se debe a que nuestro código está contrarrestando el efecto de la gravedad en el movimiento del manipulador.
+En la Imagen 2 se puede observar como el manipulador se queda totalmente estático en la posición inicial dada. Esto se debe a que nuestro código está contrarrestando el efecto de la gravedad en el movimiento del manipulador.
 </div>
 
 ### Simulación de fuerzas 
 
 <div align="justify">
-Como en la simulación no hay manera de incluir sensores de fuerza, se van a aplicar fuerzas virtuales al manipulador para ver como se comporta. Esto se puede hacer gracias a que, en la sesión anterior, en el nodo de la dinámica del manipulador, se incluyeron los torques producidos por fuerzas externas. Para entenderlo mejor, tenemos el Video 1.
+Como en la simulación no hay manera de incluir sensores de fuerza, se van a aplicar fuerzas virtuales al manipulador para ver como se comporta. Esto se puede hacer gracias a que, en la sesión anterior, en el nodo de la dinámica del manipulador, se incluyeron los torques producidos por fuerzas externas. Para entenderlo mejor, se visualiza en el Video 1.
 </div>
 
 <p align="center">
@@ -74,8 +74,9 @@ Como en la simulación no hay manera de incluir sensores de fuerza, se van a apl
 
 
 <div align="justify">
-En el Video 1 se puede apreciar como las fuerzas en las distintas direcciones generan un movimiento del robot. El problema está en que al cesar esas fuerzas, la inercia del manipulador se mantiene, por lo que se sigue moviendo por un tiempo aunque nuestro controlador esté contrarrestando la fuerza de la gravedad. 
-<br><br>
+  
+En el Video 1 se puede apreciar como las fuerzas en las distintas direcciones generan un movimiento del robot. El problema está en que al cesar esas fuerzas, la inercia del manipulador se mantiene, por lo que se sigue moviendo aunque nuestro controlador esté contrarrestando la fuerza de la gravedad. 
+
 En la Imagen 3 se pueden ver las relaciones entre los nodos y los tópicos que se están ejecutando.
 </div>
 
@@ -91,7 +92,8 @@ En la Imagen 3 se pueden ver las relaciones entre los nodos y los tópicos que s
 ### Implementación
 
 <div align="justify">
-Ahora, se puede compensar las dinámicas no lineales del manipulador usando el método de linealización por realimentación. De esta manera, se podrá ser capaz de alcanzar un comportamiento dinámico deseado sin que las propias dinámicas del manipulador afecten a su movimiento. Para llevar a cabo esto, se debe seguir el esquema de la Imagen 4.
+  
+Ahora, se pueden compensar las dinámicas no lineales del manipulador usando el método de linealización por realimentación. De esta manera, se podrá ser capaz de alcanzar un comportamiento dinámico deseado sin que las propias dinámicas del manipulador afecten a su movimiento. Para llevar a cabo esto, se debe seguir el esquema de la Imagen 4.
 </div>
 
 <p align="center">
@@ -102,7 +104,8 @@ Ahora, se puede compensar las dinámicas no lineales del manipulador usando el m
 </p>
 
 <div align="justify">
-Se necesita entonces crear un nuevo nodo con el que calcular la cancelación de la dinámica no lineal del manipulador, basado en las aceleraciones articulares deseadas y el estado actual de las articulaciones. Entonces, en la Ecuación 2, tendremos el valor de los torques articulares que enviaremos al manipulador.
+  
+Se necesita entonces crear un nuevo nodo con el que calcular la cancelación de la dinámica no lineal del manipulador, basado en las aceleraciones articulares deseadas y el estado actual de las articulaciones. Entonces, en la Ecuación 2, se calcula el valor de los torques articulares que se enviarán al manipulador.
 </div>
 
 $$
@@ -113,7 +116,7 @@ n(q,q') = C(q,q')q' + F_bq' + g(q) \\
 $$
 
 <div align="justify">
-Entonces, se crea el nodo "dynamics_cancellation", se copia el código dado en la práctica y se rellena la función "cancel_dynamics" con el código de la Imagen 5.
+Ahora, se crea el nodo "dynamics_cancellation", se copia el código dado en la práctica y se rellena la función "cancel_dynamics" con el código de la Imagen 5.
 </div>
 
 <p align="center">
@@ -126,7 +129,8 @@ Entonces, se crea el nodo "dynamics_cancellation", se copia el código dado en l
 ### Ejecutando el controlador
 
 <div align="justify">
-Para simular el controlador se deben ejecutar los siguientes comandos, cada uno en un terminal.
+  
+Para simular el controlador, primero deberemos volver a modificar el CMakeList.txt para incluir como ejecutable este nuevo nodo además de añadir sus dependencias. Habiendo hecho esto, se deben ejecutar los siguientes comandos, cada uno en un terminal, para llevar a cabo la simulación.
 </div>
 
     ros2 launch uma_arm_description uma_arm_visualization.launch.py 
@@ -156,6 +160,7 @@ Usando cada uno de estos comandos se consigue el comportamiento del Video 2. En 
 </p>
 
 <div align="justify">
+  
 Para ver con más claridad este comportamiento, se puede grabar usando las rosbags y graficar el comportamiento en Plotjuggler en la Imagen 7.
 </div>
 
@@ -169,7 +174,7 @@ Para ver con más claridad este comportamiento, se puede grabar usando las rosba
 ## Experimentos
 
 <div align="justify">
-¿Qué ocurre si el modelo de compensación de la dinámica no es igual a la dinámica del manipulador?. En este experimento, se ha cambiado las masas del modelo de cancelación de la dinámica, la masa 1 de 3 a 5 kilogramos y la masa 2 de 2 a 3 kilogramos. El resultado se puede observar en la Imagen 8.
+¿Qué ocurre si el modelo de compensación de la dinámica no es igual a la dinámica del manipulador?. En este experimento, se han cambiado las masas del modelo de cancelación de la dinámica, la masa 1 de 3 a 5 kilogramos y la masa 2 de 2 a 3 kilogramos. El resultado se puede observar en la Imagen 8.
 </div>
 
 <p align="center">
@@ -180,9 +185,10 @@ Para ver con más claridad este comportamiento, se puede grabar usando las rosba
 </p>
 
 <div align="justify">
+  
 El comportamiento del manipulador es totalmente aleatorio, sin control. Esto se debe a que la cancelación de la dinámica envía el torque necesario para mantener 5 kilogramos en suspensión cuando en realidad son 3, por lo que sobreoscila. 
-<br><br>
-Probemos ahora a cambiar la compensación de la gravedad, la longitud 1 pasa a ser de 2 metros en vez de uno, y la longitud 2 pasa a ser de 2 en vez de 0.6. En la Imagen 9 se ven los resultados.
+
+Ahora se probará a cambiar la compensación de la gravedad, la longitud 1 pasa a ser de 2 metros en vez de uno, y la longitud 2 pasa a ser de 2 en vez de 0.6. En la Imagen 9 se ven los resultados.
 </div>
 
 <p align="center">
@@ -193,9 +199,10 @@ Probemos ahora a cambiar la compensación de la gravedad, la longitud 1 pasa a s
 </p>
 
 <div align="justify">
+  
 En este caso se puede ver que el manipulador calcula un torque de los motores mayor al que realmente necesita para contrarrestar la gravedad, lo que provoca q el manipulador suba hacia arriba.
-<br><br>
-Por último, se va a observar el comportamiento del manipulador cuando cancela su dinámica pero le aplicamos fuerzas. Este experimento se puede ver en el Video 3. El manipulador no se mantiene estable ni se frena, esto se debe a que, al cancelar su propia dinámica, contrarresta los torques producidos por las inercias de los eslabones, lo que no quiere decir que se mantenga quieto, sino que si se está moviendo a una velocidad, va a seguir moviendose a esa velocidad constantemente sin tener cambios de torque en los motores.
+
+Por último, se va a observar el comportamiento del manipulador cuando cancela su dinámica pero se le aplican fuerzas. Este experimento se puede ver en el Video 3. 
 </div>
 
 <p align="center">
@@ -205,6 +212,9 @@ Por último, se va a observar el comportamiento del manipulador cuando cancela s
   <i>Video 3.- Comportamiento del manipulador al ejercerle fuerzas externas.</i>
 </p>
 
+<div align="justify">
 
+  El manipulador no se mantiene estable ni se frena, esto se debe a que, al cancelar su propia dinámica, contrarresta los torques producidos por las inercias de los eslabones, lo que no quiere decir que se mantenga quieto, sino que si se está moviendo a una velocidad, va a seguir moviendose a esa velocidad constantemente sin tener cambios de torque en los motores.
+</div>
 
 
