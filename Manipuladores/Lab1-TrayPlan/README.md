@@ -64,7 +64,7 @@ Ahora debemos calcular la interpolación de la orientación. Para empezar, un cu
 </p>
 
 <div align="justify">
-Viendo la Imagen 2, podemos calcular entonces los cuaternios de los puntos iniciales y finales de nuestra trayectoria. En el código, este cálculo lo hace ya la función “tr2q” para calcular los cuaternios de los puntos inicial y final. Ahora, debemos calcular cuál es el “cuaternio de paso” entre el cuaternio inicial y el final, para ello hacemos uso de la ecuación 5.
+Viendo la Imagen 2, podemos calcular entonces los cuaternios de los puntos iniciales y finales de nuestra trayectoria. En el código, este cálculo lo hace ya la función “tr2q”. Ahora, debemos calcular cuál es el “cuaternio de paso” entre el inicial y el final, para ello hacemos uso de la ecuación 5.
 </div>
 
 $$
@@ -74,6 +74,7 @@ q_A·q_C=q_B → q_C=(q_A)-1·q_B \qquad\qquad (5)
 $$
 
 <div align="justify">
+  
 Siendo $q_C$ el cuaternio que, compuesto con el cuaternio inicial nos da el final.
   
 Conociendo el “cuaternio de paso”, podemos calcular el ángulo y el eje en el que se realiza el giro con las ecuaciones 6 y 7.
@@ -109,6 +110,7 @@ q_{rot}(\lambda)=[w_{rot}(\lambda) , v_{rot}(\lambda)] \qquad\qquad (11)
 $$
 
 <div align="justify">
+  
 Si ahora aplicamos este cuaternión de rotación al cuaternio inicial ($q_A$), obtenemos la interpolación del cuaternio. Esto lo vemos en la ecuación 12.
 </div>
 
@@ -131,6 +133,7 @@ Ya tendríamos la interpolación de la posición y de la orientación, por lo qu
 
 ### Generación de una Trayectoria Suavizada
 <div align="justify">
+  
 Ahora, en este apartado, queremos generar una trayectoria suavizada a lo largo del camino generado por los puntos $p_0$, $p_1$ y $p_2$ como podemos ver en la Imagen 4. Para ello, definimos tres segmentos, el segmento que va desde el tiempo inicial hasta un valor , anterior al punto $p_1$, luego un segmento entre el  anterior y el  posterior a $p_1$ y por último, el segmento desde el  posterior hasta el tiempo final. En la Imagen 4 lo podemos ver más claro.
 </div>
 
@@ -142,9 +145,10 @@ Ahora, en este apartado, queremos generar una trayectoria suavizada a lo largo d
 </p>
 
 <div align="justify">
+  
 Teniendo esto en cuenta, debemos empezar ha hacer los cálculos de la posición y la orientación que debe tener nuestro robot en cada momento.
 
-Para empezar, el primer segmento y el tercero son muy sencillos de calcular, ya que consistiría en la interpolación entre el punto inicial y final de las rectas, definidas por los puntos $p_0p_1$ y $p_1p_2$, teniendo en cuenta que el tiempo no iría desde el inicial hasta el final, si no que acabaría o empezaría en cierto tiempo . Por tanto, comprobamos si estamos dentro del tiempo de la recta, y si es así, llamamos a la función que hicimos con anterioridad, “qpinter” siendo el valor lambda el tiempo actual.
+Para empezar, el primer segmento y el tercero son muy sencillos de calcular, ya que consistiría en la interpolación entre el punto inicial y final de las rectas, definidas por los puntos $p_0p_1$ y $p_1p_2$, teniendo en cuenta que el tiempo no iría desde el inicial hasta el final, si no que acabaría o empezaría en un tiempo $\tau$ . Por tanto, comprobamos si estamos dentro del tiempo de la recta, y si es así, llamamos a la función que hicimos con anterioridad, “qpinter” siendo el valor lambda el tiempo actual.
 
 Ahora debemos calcular el segmento intermedio. Para ello, vamos a empezar por el suavizado de la posición y luego terminaremos con el suavizado de la orientación. 
 
@@ -169,7 +173,7 @@ p''(t)=\frac{\Delta p'}{2·\tau}=\frac{p'(\tau)-p'(-\tau)}{2·\tau}=\frac{\Delta
 $$
 
 <div align="justify">
-Si integramos la aceleración con respecto al tiempo, obtendremos la velocidad en el segmento con respecto al tiempo en la ecuación 14.
+Si integramos la aceleración, obtendremos la velocidad en el segmento con respecto al tiempo en la ecuación 14.
 </div>
 
 $$
@@ -215,6 +219,7 @@ p(t)=p1 -\frac{(\tau-t)^2}{4·\tau·T_1}\Delta p_1 - \frac{(\tau+t)^2}{4·\tau·
 $$
 
 <div align="justify">
+  
 Con la ecuación 17, ya hemos obtenido la trayectoria suavizada de la posición que va a seguir nuestro robot en el segmento intermedio con respecto al tiempo.
 
 Ahora, debemos calcular la trayectoria suavizada de la orientación que va a seguir nuestro robot. El cálculo de esta trayectoria viene dado en la Imagen 6.
@@ -228,6 +233,7 @@ Ahora, debemos calcular la trayectoria suavizada de la orientación que va a seg
 </p>
 
 <div align="justify">
+  
 Como vemos en la Imagen 6, necesitamos los cuaternios de la primera y segunda interpolación suavizante. Para calcularlas, vamos a denominar a la primera $q_{k1}$ y a la segunda $q_{k2}$, y vamos a usar las ecuaciones 18 y 19. 
 </div>
 
@@ -252,6 +258,7 @@ q_{k2}=[cos(\frac{\theta_{k2}}{2}) , n_{12}·sin(\frac{\theta_{k2}}{2})] \qquad\
 $$
 
 <div align="justify">
+  
 Habiendo calculado estos dos cuaternios, ya solo nos queda seguir la Imagen 6 y multiplicarlos con el cuaternio del punto donde se va a suavizar la trayectoria. Habiendo hecho todo esto, ya podemos crear el código Matlab en la Imagen 7.
 </div>
 
@@ -264,6 +271,7 @@ Habiendo calculado estos dos cuaternios, ya solo nos queda seguir la Imagen 6 y 
 
 ### Representación Gráfica
 <div align="justify">
+  
 Para la representación gráfica, solo debemos ejecutar el nombre del código principal en la ventana de comandos. Esto ejecutará una simulación en la que vemos un brazo robótico haciendo la trayectoria suavizada que hemos calculado. Esta simulación la podemos ver en el vídeo.
 </div>
 
@@ -274,6 +282,7 @@ Para la representación gráfica, solo debemos ejecutar el nombre del código pr
 </p>
 
 <div align="justify">
+  
 Con esta simulación, obtenemos las siguientes gráficas, que representan las variables de posición y de orientación a lo largo del tiempo. Estas gráficas, las vemos en las Imágenes 8 y 9.
 </div>
 
@@ -293,5 +302,6 @@ Con esta simulación, obtenemos las siguientes gráficas, que representan las va
 </p>
 
 <div align="justify">
-Viendo las gráficas de orientación, podemos ver algo extraño, y es que el ángulo “gamma” justo en el punto medio de la trayectoria llega a valores altísimos. Este comportamiento se debe a que justo el punto “P1” de la trayectoria produce una singularidad en la orientación del manipulador, pero al hacer una trayectoria suavizada, pasamos cerca, pero no por el punto. Lo que hace que la orientación no tienda a infinito pero sí que sea muy alta.
+  
+Viendo las gráficas de orientación, podemos ver algo extraño, y es que el ángulo “gamma”, justo en el punto medio de la trayectoria, tiene un pico. Este comportamiento se debe a que justo el punto “P1” de la trayectoria produce una singularidad en la orientación del manipulador, pero al hacer una trayectoria suavizada, pasamos cerca, pero no por el punto. Lo que hace que la orientación no tienda a infinito, siendo, este valor, menor cuanto más alejado pase el manipulador del punto.
 </div>
